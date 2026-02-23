@@ -2,7 +2,7 @@
 
 # 🕌 pAIjo RAG — Islamic Knowledge Retrieval System
 
-**A Retrieval-Augmented Generation (RAG) pipeline for an Islamic knowledge assistant serving the Nahdlatul Ulama (NU) community**
+**A Retrieval-Augmented Generation (RAG) pipeline for an Islamic knowledge assistant serving the Indonesian Muslim community**
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com)
@@ -33,17 +33,17 @@
 
 ## 🔍 Overview
 
-**pAIjo RAG** is the retrieval-augmented generation component of [pAIjo](https://github.com/ainunnajib), a WhatsApp-based Islamic knowledge assistant designed for the Indonesian Muslim community, specifically aligned with the **Nahdlatul Ulama (NU)** tradition — the largest Islamic organization in the world with over 90 million members.
+**pAIjo RAG** is the retrieval-augmented generation component of [pAIjo](https://github.com/ainunnajib), a WhatsApp-based Islamic knowledge assistant designed for the Indonesian Muslim community.
 
 The RAG system enables pAIjo to:
 - **Retrieve verified Islamic knowledge** from a curated vector database
-- **Ground LLM responses** in authentic NU-tradition sources to prevent hallucination
+- **Ground LLM responses** in authentic authenticated Islamic sources to prevent hallucination
 - **Serve real-time queries** on Islamic jurisprudence (fiqih), worship practices, and religious guidance
 - **Scale to concurrent users** with sub-100ms retrieval latency
 
 ### Why RAG for Islamic Knowledge?
 
-Fabricating or misattributing Islamic quotes is a **critical failure mode** for any AI system. By implementing RAG, we ensure that every response is grounded in verified, curated content from trusted NU scholars and authenticated Islamic sources — not generated from potentially unreliable training data.
+Fabricating or misattributing Islamic quotes is a **critical failure mode** for any AI system. By implementing RAG, we ensure that every response is grounded in verified, curated content from trusted Islamic scholars and authenticated sources — not generated from potentially unreliable training data.
 
 ---
 
@@ -118,7 +118,7 @@ curl -X POST http://localhost:8100/ingest \
     "text": "Tahlilan adalah tradisi membaca doa dan surat-surat Al-Quran...",
     "metadata": {
       "topic": "tahlilan",
-      "source": "NU Online",
+      "source": "Islamic scholarly source",
       "category": "fiqih"
     }
   }'
@@ -145,7 +145,7 @@ curl -X POST http://localhost:8100/retrieve \
       "score": 0.30,
       "metadata": {
         "topic": "tahlilan",
-        "source": "NU Online"
+        "source": "Islamic scholarly source"
       }
     }
   ]
@@ -160,17 +160,17 @@ The RAG system currently contains **68 curated knowledge chunks** across multipl
 
 | Category | Chunks | Topics |
 |----------|--------|--------|
-| **NU Fiqih & Traditions** | 24 | Tahlilan, Qunut, Maulid Nabi, Ziarah, Istighotsah, Hizib, Ratib, and more |
+| **Islamic Fiqih & Traditions** | 24 | Tahlilan, Qunut, Maulid Nabi, Ziarah, Istighotsah, Hizib, Ratib, and more |
 | **Ramadan Guidance** | 12 | Prayer times, fiqih puasa, tarawih, sahur/iftar, zakat fitrah |
 | **General Islamic Q&A** | 32 | Foundational Islamic knowledge, ibadah, muamalah |
 
 ### Knowledge Domains
-- **Tahlilan** — NU tradition of collective prayer and Quran recitation
-- **Tarawih** — Ramadan night prayers (20 rakaat NU tradition)
+- **Tahlilan** — tradition of collective prayer and Quran recitation
+- **Tarawih** — Ramadan night prayers (20 rakaat tradition)
 - **Puasa (Fasting)** — Rules, invalidators, and spiritual dimensions
 - **Zakat** — Obligatory charity calculations and distribution
 - **Sholat** — Daily prayer guidance and jurisprudence
-- **NU-specific practices** — Qunut, Maulid, Hizib, Ratib Al-Haddad
+- **Traditional Islamic practices** — Qunut, Maulid, Hizib, Ratib Al-Haddad
 
 ---
 
@@ -203,7 +203,7 @@ End-to-end verification was performed via Telegram integration, codenamed **"Und
 2. **Retrieval verification** — Queries returned semantically relevant results with correct source attribution
 3. **Integration verification** — Full pipeline tested from Telegram message → FastAPI → Qdrant → Response delivery
 4. **Stress testing** — 25 concurrent connections maintained stable ~100ms response times
-5. **Content accuracy** — Retrieved content verified against original NU scholarly sources
+5. **Content accuracy** — Retrieved content verified against original Islamic scholarly sources
 
 ---
 
@@ -260,21 +260,17 @@ curl -X POST http://localhost:8100/retrieve \
 pAIjo is a larger initiative to build an accessible, trustworthy Islamic knowledge assistant for Indonesian Muslims via WhatsApp — the most widely used messaging platform in Indonesia (200M+ users).
 
 **Brand tiers:**
-- **pAIjo** — Free community tier (NU-focused Islamic Q&A)
+- **pAIjo** — Free community tier (Islamic Q&A)
 - **santAI** — Premium tier with advanced features
 - **pandAI** — Enterprise/institutional tier
 
 The RAG system is the **knowledge backbone** that ensures pAIjo's responses are grounded in verified Islamic scholarship rather than LLM hallucination — a critical requirement for religious content.
 
-### Nahdlatul Ulama (NU)
-
-[Nahdlatul Ulama](https://www.nu.or.id/) is the world's largest Islamic organization (~90 million members), headquartered in Indonesia. NU follows the Sunni tradition with the Shafi'i school of jurisprudence and is known for its moderate, tolerant approach to Islam (*Islam Nusantara*).
-
 ---
 
 ## 🤝 Collaboration
 
-This project was built in collaboration with **[Ainun Najib](https://github.com/ainunnajib)**, an AI engineer based in Singapore who leads the pAIjo initiative.
+This project was built in collaboration with **[Ainun Najib](https://github.com/ainunnajib)**, an Indonesian data platform & civic tech leader based in Singapore, who leads the pAIjo initiative.
 
 **Roles:**
 - **Ainun Najib** — Project lead, architecture design, AI/ML strategy, knowledge curation, infrastructure (Dalang cloud VM)
@@ -286,7 +282,7 @@ This project was built in collaboration with **[Ainun Najib](https://github.com/
 - Built ingestion pipeline for converting Islamic scholarly content into embeddings
 - Conducted stress testing (25 concurrent connections, ~100ms latency)
 - Performed end-to-end verification ("Undid Iridium" test) via Telegram integration
-- Compiled 60-70 NU topic questions for knowledge base expansion
+- Compiled 60-70 topic questions for knowledge base expansion
 
 ---
 
