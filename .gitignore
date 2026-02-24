@@ -32,3 +32,6 @@ Thumbs.db
 
 # Model cache
 .cache/
+
+# Qdrant local storage
+.qdrant_storage/

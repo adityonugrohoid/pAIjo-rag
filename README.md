@@ -152,7 +152,7 @@ The RAG system contains curated knowledge chunks across multiple Islamic domains
 ### Prerequisites
 
 - Python 3.10+
-- Docker (for Qdrant)
+- Qdrant (via Docker or [standalone binary](https://github.com/qdrant/qdrant/releases))
 
 ### Installation
 
@@ -175,17 +175,36 @@ cp .env.example .env
 
 ### Start Qdrant
 
+**Option A: Docker (recommended for production)**
+
 ```bash
 docker compose up -d
 ```
 
-### Run the Server
+**Option B: Binary (lightweight, good for local dev)**
+
+Download and run the Qdrant binary directly — no Docker needed:
+
+```bash
+# Download (one-time)
+curl -sL https://github.com/qdrant/qdrant/releases/latest/download/qdrant-x86_64-unknown-linux-musl.tar.gz | tar -xz -C /usr/local/bin/
+
+# Run with persistent local storage
+mkdir -p .qdrant_storage
+cd .qdrant_storage && qdrant &
+```
+
+The storage directory is only ~1MB for the full knowledge base and is gitignored.
+
+### Run the Server (API mode)
+
+This requires **two terminals**: one for Qdrant, one for the server.
 
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8100
 ```
 
-### Quick Test
+Then test with curl:
 
 ```bash
 # Health check
@@ -201,7 +220,11 @@ curl -X POST http://localhost:8100/retrieve \
   -d '{"query": "apa itu tahlilan?", "top_k": 3}'
 ```
 
-### CLI Ingestion
+### CLI Scripts (no server needed)
+
+The CLI scripts connect to Qdrant directly — you only need Qdrant running, **not** the FastAPI server.
+
+**Ingest:**
 
 ```bash
 # Ingest all knowledge files
@@ -209,6 +232,22 @@ python scripts/ingest.py
 
 # Ingest a specific file
 python scripts/ingest.py --path rag-knowledge/ramadan-01.md
+```
+
+**Retrieve:**
+
+```bash
+# Search the knowledge base
+python scripts/retrieve.py "apa itu tahlilan?"
+
+# More results
+python scripts/retrieve.py "kapan ramadhan?" --top-k 5
+
+# Filter by category
+python scripts/retrieve.py "shalat tarawih" --category ibadah
+
+# Raw JSON output
+python scripts/retrieve.py "undid iridium" --json
 ```
 
 ### Embedding Providers
@@ -242,8 +281,10 @@ pAIjo-rag/
 │       ├── embeddings.py  # Dual backend: local MiniLM + OpenAI
 │       └── vectorstore.py # Qdrant client wrapper
 ├── scripts/
-│   └── ingest.py          # CLI ingestion tool
+│   ├── ingest.py          # CLI ingestion tool
+│   └── retrieve.py        # CLI retrieval tool
 ├── rag-knowledge/         # Curated Islamic knowledge base
+├── .qdrant_storage/       # Local Qdrant data (gitignored)
 ├── docker-compose.yml     # Qdrant service
 ├── Dockerfile
 ├── requirements.txt
