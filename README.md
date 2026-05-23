@@ -2,11 +2,11 @@
 
 # pAIjo RAG
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg)](https://fastapi.tiangolo.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**RAG pipeline for an Islamic knowledge assistant - FastAPI, Qdrant, and sentence-transformers grounding for the pAIjo WhatsApp bot**
+**RAG pipeline for an Islamic knowledge assistant: FastAPI, Qdrant, and sentence-transformers grounding for the pAIjo WhatsApp bot**
 
 *Built in collaboration with [Ainun Najib](https://github.com/ainunnajib) as part of the [pAIjo](https://github.com/ainunnajib/pAIjo) WhatsApp Muslim Assistant project*
 
